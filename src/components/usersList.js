@@ -1,4 +1,6 @@
-import React from 'react'
+import React, {useState,useEffect} from 'react'
+
+import {interestsMock,usersMock} from '../API'
 
 function Users() {
     return (
