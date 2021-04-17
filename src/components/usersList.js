@@ -7,7 +7,6 @@ function Users() {
 
     const [users,setUsers] = useState()
     const [interests,setInterests] = useState()
-    let count
 
     useEffect(() => {
         // get users
@@ -22,14 +21,13 @@ function Users() {
         
     }, [])
 
-console.log('users', users)
 
- count = users?.map(user => {
-    const result = users?.filter(c => c.id !== user.id && c.following.indexOf(user.id) > -1)?.length;
-    return { id: user.id, followers: result };});
+ let followersCount = users?.map(user => {
+    const followersLength = users?.filter(c => c.id !== user.id && c.following.indexOf(user.id) > -1)?.length;
+    return { id: user.id, followers: followersLength };});
 
 console.log('++++', 
-count
+followersCount
 )
 
     return (
