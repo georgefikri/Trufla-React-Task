@@ -7,7 +7,7 @@ function Users() {
 
     const [users,setUsers] = useState()
     const [interests,setInterests] = useState()
-
+    let count
 
     useEffect(() => {
         // get users
@@ -19,13 +19,32 @@ function Users() {
         axios.get('interests.json')
         .then(res => setInterests(res.data))
         .catch(err => console.log(err))
+        
     }, [])
 
+console.log('users', users)
 
+ count = users?.map(user => {
+    const result = users?.filter(c => c.id !== user.id && c.following.indexOf(user.id) > -1)?.length;
+    return { id: user.id, followers: result };});
+
+console.log('++++', 
+count
+)
 
     return (
         <div>
-            hello world
+            <div>
+                <h1>users</h1>
+                {users?.map(user => (
+                    <div key={user?.name}>
+                        <ul>
+                            <li>name: {user?.name}</li>
+
+                        </ul>
+                    </div>
+                ))}
+            </div>
         </div>
     )
 }
