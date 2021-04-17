@@ -36,22 +36,7 @@ function Users() {
                     /*******************interests********************/
                     let responseTwo = responses[1].data;
                     setInterests(responseTwo)
-                    if(users !== [] && interests !== []) {
-                        console.log('interests goa', interests)
-                        console.log('users goa ',users)
-
-                        console.log('el filter',
-                        users.map(user => {
-                            return {
-                              id: user?.id, interests: interests.filter(c => user.interests.indexOf(c.id) > -1).map(interest => {
-                                return interest.name;
-                              })
-                            };
-                          })
-                        )
-                    }
           
-
 
                 })
             )
@@ -94,6 +79,24 @@ function Users() {
     }, [sortBoolean])
 
    
+    useEffect(() => {
+        if(users.length && interests.length) {
+            console.log('interests goa', interests)
+            console.log('users goa ',users)
+            setUsers( users.map(user => {
+                return {
+                  id: user.id,
+                  name: user?.name,
+                  count: user?.count,
+                   interests: interests.filter(c => user.interests?.indexOf(c.id) > -1).map(interest => {
+                    return interest.name;
+                  })
+                };
+              }))
+              
+        }
+    }, [interests])
+
 console.log('users', 
 users
 )
