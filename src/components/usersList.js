@@ -129,6 +129,12 @@ const sort  = (sort) => {
                                             {name: user?.name}])}>
                                         show interests
                                     </button>
+                                    <button onClick={
+                                        ()=> setShowInterests(showInterests.filter((obj)=>{
+                                            return obj.name !== user?.name;
+                                        }))}>
+                                        hide interests
+                                    </button>
 
                                     {showInterests !== [] 
                                         &&showInterests.some(singleInterest => singleInterest.name === user?.name) && 
