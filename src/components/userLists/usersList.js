@@ -74,6 +74,11 @@ const sort  = (sort) => {
         <div>
             <div>
                 <h1>users list</h1>
+                <div className='sorting-list'>
+                    <button onClick={()=> sort('ascending')}>ascending sort</button>
+                    <button onClick={()=> sort('descending')}>descending sort</button>
+                </div>
+                
                 <div className='margin-bottom-30 list-container'>
                 {users?.map(user => (
                         <div key={user?.name} className='list-item'>
@@ -123,10 +128,7 @@ const sort  = (sort) => {
                         </div>
                 ))}
                 </div>
-                <div className='sorting-list'>
-                    <button onClick={()=> sort('ascending')}>ascending sort</button>
-                    <button onClick={()=> sort('descending')}>descending sort</button>
-                </div>
+
 
             </div>
         </div>
