@@ -80,7 +80,6 @@ const sort  = (sort) => {
                                         show interests
                                     </button>
                                     <button 
-                                        className={`${showInterests?.length ? undefined : 'hide'}`} 
                                         onClick={
                                             ()=> setShowInterests(showInterests.filter((obj)=>{
                                                 return obj.name !== user?.name;
