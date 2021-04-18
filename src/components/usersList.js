@@ -55,12 +55,12 @@ function Users() {
         if(users.length && interests.length) {
             setUsers( users.map(user => {
                 return {
-                  id: user.id,
-                  name: user?.name,
-                  count: user?.count,
+                    id: user.id,
+                    name: user?.name,
+                    count: user?.count,
                     interests: interests.filter(c => user.interests?.indexOf(c.id) > -1).map(interest => {
-                    return interest.name;
-                  })
+                        return interest.name;
+                    })
                 };
               }))
               
@@ -76,9 +76,9 @@ const sort  = (sort) => {
         <div>
             <div>
                 <h1>users</h1>
+                <ul >
                 {users?.map(user => (
-                    <div key={user?.name}>
-                        <ul>
+                        <li key={user?.name}>
                             <li>name: {user?.name}</li>
                             <li>followers count: {user?.count}</li>
                             {
@@ -119,9 +119,9 @@ const sort  = (sort) => {
                                     remove user
                                 </button>
                             </li>
-                        </ul>
-                    </div>
+                        </li>
                 ))}
+                </ul>
                 <button onClick={()=> sort('ascending')}>ascending sort</button>
                 <button onClick={()=> sort('descending')}>descending sort</button>
 
