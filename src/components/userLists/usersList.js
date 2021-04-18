@@ -43,6 +43,7 @@ const sort  = (sort) => {
     setSortBoolean(sort);
 }
 
+
     return (
         <div>
             <div>
@@ -50,6 +51,10 @@ const sort  = (sort) => {
                 <div className='sorting-list'>
                     <button onClick={()=> sort('ascending')}>ascending sort</button>
                     <button onClick={()=> sort('descending')}>descending sort</button>
+                    <span className='users-total-count'>
+                        <label>Total Users</label>
+                        <span>{users?.length}</span>
+                    </span>
                 </div>
                 <div className='margin-bottom-30 list-container'>
                 {users?.map(user => (
