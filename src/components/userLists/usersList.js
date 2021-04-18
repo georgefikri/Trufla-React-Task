@@ -11,12 +11,12 @@ function Users() {
 
     let one = "users.json"
     let two = "interests.json"
-    const requestOne = axios.get(one);
-    const requestTwo = axios.get(two);
+    const usersRequest = axios.get(one);
+    const interestsRequest = axios.get(two);
     useEffect(() => {
         /***************************************/
         axios
-            .all([requestOne, requestTwo])
+            .all([usersRequest, interestsRequest])
             .then(
                 axios.spread((...responses) => {
                     /*******************users********************/
@@ -38,8 +38,6 @@ function Users() {
                     /*******************interests********************/
                     let responseTwo = responses[1].data;
                     setInterests(responseTwo)
-          
-
                 })
             )
             .catch(errors => {
@@ -48,10 +46,9 @@ function Users() {
             });
         /***************************************/
 
-        
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [sortBoolean])
 
-   
     useEffect(() => {
         if(users.length && interests.length) {
             setUsers( users.map(user => {
@@ -63,9 +60,9 @@ function Users() {
                         return interest.name;
                     })
                 };
-              }))
-              
+            }))
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [interests])
 
 
@@ -83,36 +80,37 @@ const sort  = (sort) => {
                             <h3 className='name'>{user?.name}</h3>
                             <div className='count'>followers count: {user?.count}</div>
                             {showInterests !== [] 
-                                        &&showInterests.some(singleInterest => singleInterest.name === user?.name) && 
-                                        <div className='interests-list'>
-                                            <p>
-                                                {
-                                                    user?.interests?.map(interest => {
-                                                        return <span key={interest}>
-                                                            {interest}
-                                                            </span>
-                                                    })
-                                                }
-                                            </p>
-                                        </div>
+                                &&showInterests.some(singleInterest => singleInterest.name === user?.name) && 
+                                <div className='interests-list'>
+                                    <p>
+                                        {
+                                            user?.interests?.map(interest => {
+                                                return <span key={interest}>
+                                                    {interest}
+                                                    </span>
+                                            })
+                                        }
+                                    </p>
+                                </div>
                             }
                             {
                                 user?.interests?.length ? 
-                                <div className='toggle-interests'>
-                                    <button 
-                                        onClick ={()=> 
-                                            setShowInterests([...showInterests,
-                                            {name: user?.name}])}>
-                                        show interests
-                                    </button>
-                                    <button onClick={
-                                        ()=> setShowInterests(showInterests.filter((obj)=>{
-                                            return obj.name !== user?.name;
-                                        }))}>
-                                        hide interests
-                                    </button>
+                                    <div className='toggle-interests'>
+                                        {console.log('interests', showInterests)}
+                                        <button 
+                                            onClick ={()=> 
+                                                setShowInterests([...showInterests,
+                                                {name: user?.name}])}>
+                                            show interests
+                                        </button>
+                                        <button className={`${showInterests?.length ? undefined : 'hide'}`} onClick={
+                                            ()=> setShowInterests(showInterests.filter((obj)=>{
+                                                return obj.name !== user?.name;
+                                            }))}>
+                                            hide interests
+                                        </button>
 
-                                </div>
+                                    </div>
                                 : undefined
                             }
                             <div className='remove-user'>
