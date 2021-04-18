@@ -6,6 +6,7 @@ function Users() {
     const [users,setUsers] = useState([])
     const [interests,setInterests] = useState([])
     const [sortBoolean, setSortBoolean] = useState(false)
+    const [showInterests, setShowInterests] = useState([])
 
     let one = "users.json"
     let two = "interests.json"
@@ -104,6 +105,7 @@ console.log('interests',
 interests
 )
 
+console.log('showInterests', showInterests)
 
 const sort  = (sort) => {
     setSortBoolean(sort)
@@ -118,6 +120,32 @@ const sort  = (sort) => {
                         <ul>
                             <li>name: {user?.name}</li>
                             <li>followers count: {user?.count}</li>
+                            {
+                                user?.interests?.length ? 
+                                <li>
+                                    <button 
+                                        onClick ={()=> 
+                                            setShowInterests([...showInterests,
+                                            {name: user?.name}])}>
+                                        show interests
+                                    </button>
+
+                                    {showInterests !== [] 
+                                        &&showInterests.some(singleInterest => singleInterest.name === user?.name) && 
+                                        <ul>
+                                            {
+                                                user?.interests?.map(interest => {
+                                                    return <li key={interest}>
+                                                        {interest}
+                                                    </li>
+                                                })
+                                            }
+                                        </ul>
+                                    }
+                                </li>
+                     
+                                : undefined
+                            }
                         </ul>
                     </div>
                 ))}
