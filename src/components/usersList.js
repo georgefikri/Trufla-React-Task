@@ -152,6 +152,13 @@ const sort  = (sort) => {
                      
                                 : undefined
                             }
+                            <li>
+                                <button onClick={()=> setUsers(users.filter((obj)=>{
+                                            return obj.name !== user?.name;
+                                        }))}>
+                                    remove user
+                                </button>
+                            </li>
                         </ul>
                     </div>
                 ))}
