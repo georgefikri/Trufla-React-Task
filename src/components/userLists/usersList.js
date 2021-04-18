@@ -1,5 +1,6 @@
 import React, {useState,useEffect} from 'react'
 import axios from 'axios'
+import './styles/styles.scss';
 
 function Users() {
 
@@ -75,15 +76,29 @@ const sort  = (sort) => {
     return (
         <div>
             <div>
-                <h1>users</h1>
-                <ul >
+                <h1>users list</h1>
+                <div className='margin-bottom-30 list-container'>
                 {users?.map(user => (
-                        <li key={user?.name}>
-                            <li>name: {user?.name}</li>
-                            <li>followers count: {user?.count}</li>
+                        <div key={user?.name} className='list-item'>
+                            <h3 className='name'>{user?.name}</h3>
+                            <div className='count'>followers count: {user?.count}</div>
+                            {showInterests !== [] 
+                                        &&showInterests.some(singleInterest => singleInterest.name === user?.name) && 
+                                        <div className='interests-list'>
+                                            <p>
+                                                {
+                                                    user?.interests?.map(interest => {
+                                                        return <span key={interest}>
+                                                            {interest}
+                                                            </span>
+                                                    })
+                                                }
+                                            </p>
+                                        </div>
+                            }
                             {
                                 user?.interests?.length ? 
-                                <li>
+                                <div className='toggle-interests'>
                                     <button 
                                         onClick ={()=> 
                                             setShowInterests([...showInterests,
@@ -97,33 +112,23 @@ const sort  = (sort) => {
                                         hide interests
                                     </button>
 
-                                    {showInterests !== [] 
-                                        &&showInterests.some(singleInterest => singleInterest.name === user?.name) && 
-                                        <ul>
-                                            {
-                                                user?.interests?.map(interest => {
-                                                    return <li key={interest}>
-                                                        {interest}
-                                                    </li>
-                                                })
-                                            }
-                                        </ul>
-                                    }
-                                </li>
+                                </div>
                                 : undefined
                             }
-                            <li>
+                            <div className='remove-user'>
                                 <button onClick={()=> setUsers(users.filter((obj)=>{
                                             return obj.name !== user?.name;
                                         }))}>
                                     remove user
                                 </button>
-                            </li>
-                        </li>
+                            </div>
+                        </div>
                 ))}
-                </ul>
-                <button onClick={()=> sort('ascending')}>ascending sort</button>
-                <button onClick={()=> sort('descending')}>descending sort</button>
+                </div>
+                <div className='sorting-list'>
+                    <button onClick={()=> sort('ascending')}>ascending sort</button>
+                    <button onClick={()=> sort('descending')}>descending sort</button>
+                </div>
 
             </div>
         </div>
