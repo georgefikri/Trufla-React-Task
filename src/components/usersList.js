@@ -47,49 +47,18 @@ function Users() {
             });
         /***************************************/
 
-
-        // get users
-        /*axios.get('users.json')
-        .then(({data}) => {
-            console.log('data', data)
-            let newUsers = []
-
-            data.map((element) => {
-                return newUsers.push({
-                    ...element,
-                    count: data?.filter(c => c.id !== element.id && c.following.indexOf(element.id) > -1)?.length
-                })
-            })
-            if(sortBoolean === 'ascending') {
-                newUsers.sort((a,b)=> a?.count - b?.count)
-            } else if (sortBoolean === 'descending') {
-                newUsers.sort((a,b)=> b?.count - a?.count)
-
-            }
-            setUsers([...newUsers]) 
-        })
-        .catch(err => console.log(err))*/
-
-        // get interests
-        /*axios.get('interests.json')
-        .then(({data}) => {
-            setInterests(data)
-        }) 
-        .catch(err => console.log(err))*/
         
     }, [sortBoolean])
 
    
     useEffect(() => {
         if(users.length && interests.length) {
-            console.log('interests goa', interests)
-            console.log('users goa ',users)
             setUsers( users.map(user => {
                 return {
                   id: user.id,
                   name: user?.name,
                   count: user?.count,
-                   interests: interests.filter(c => user.interests?.indexOf(c.id) > -1).map(interest => {
+                    interests: interests.filter(c => user.interests?.indexOf(c.id) > -1).map(interest => {
                     return interest.name;
                   })
                 };
@@ -98,14 +67,6 @@ function Users() {
         }
     }, [interests])
 
-console.log('users', 
-users
-)
-console.log('interests', 
-interests
-)
-
-console.log('showInterests', showInterests)
 
 const sort  = (sort) => {
     setSortBoolean(sort)
@@ -149,7 +110,6 @@ const sort  = (sort) => {
                                         </ul>
                                     }
                                 </li>
-                     
                                 : undefined
                             }
                             <li>
