@@ -16,7 +16,6 @@ function Users() {
     const interestsRequest = axios.get(interestsJSON);
 
     useEffect(() => {
-        // axios chaining
         apiCall(usersRequest,interestsRequest,sortBoolean,setUsers,setInterests);
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
