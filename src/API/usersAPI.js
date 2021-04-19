@@ -11,7 +11,7 @@ export const apiCall = (usersRequest,interestsRequest,sortBoolean,setUsers,setIn
             responses[0].data.map((element) => {
                 return newUsers.push({
                     ...element,
-                    count: responses[0].data?.filter(c => c.id !== element.id && c.following.indexOf(element.id) > -1)?.length
+                    count: responses[0].data?.filter(response => response.id !== element.id && response.following.indexOf(element.id) > -1)?.length
                 })
             })
             if(sortBoolean === 'ascending') {

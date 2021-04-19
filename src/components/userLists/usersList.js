@@ -29,7 +29,7 @@ function Users() {
                     id: user.id,
                     name: user?.name,
                     count: user?.count,
-                    interests: interests.filter(c => user.interests?.indexOf(c.id) > -1).map(interest => {
+                    interests: interests.filter(interest => user.interests?.indexOf(interest.id) > -1).map(interest => {
                         return interest.name;
                     })
                 };
