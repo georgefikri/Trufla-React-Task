@@ -2,7 +2,14 @@ import React, {useState,useEffect} from 'react'
 import axios from 'axios'
 import './styles/styles.scss';
 import {apiCall} from '../../API/usersAPI'
-
+/* 
+    0. change the state on the client side ( sort , remove interest ) don't call the api again
+    1. move sorting code to be in usersList.js
+    2. remove sortBoolean from useEffect
+    3. api to be called once only ( remove any references )
+    4. fix this issue: fix followers count when remove a single user
+    4. extra: remove indidual interest
+*/
 function Users() {
 
     const [users,setUsers] = useState([])
