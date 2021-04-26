@@ -8,7 +8,8 @@ import {apiCall} from '../../API/usersAPI'
     2. remove sortBoolean from useEffect
     3. api to be called once only ( remove any references )
     4. fix this issue: fix followers count when remove a single user
-    4. extra: remove indidual interest
+    5. remove the functions to be onClick to be separated not to be added inside onClick
+    6. extra: remove indidual interest
 */
 function Users() {
 
