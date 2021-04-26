@@ -4,8 +4,8 @@ import './styles/styles.scss';
 import {apiCall} from '../../API/usersAPI'
 /* 
     0. change the state on the client side ( sort , remove interest ) don't call the api again
-    1. move sorting code to be in usersList.js
-    2. remove sortType from useEffect
+    1. move sorting code to be in usersList.js - done
+    2. remove sortType from useEffect - done
     3. api to be called once only ( remove any references )
     4. fix this issue: fix followers count when remove a single user ( the fix is use contains instead of indexOf) 
     5. remove the functions to be onClick to be separated not to be added inside onClick - done 
@@ -15,7 +15,6 @@ function Users() {
 
     const [users,setUsers] = useState([])
     const [interests,setInterests] = useState([])
-    const [sortType, setsortType] = useState(false)
     const [showInterests, setShowInterests] = useState([])
 
     let usersJSON = "users.json";
@@ -24,10 +23,10 @@ function Users() {
     const interestsRequest = axios.get(interestsJSON);
 
     useEffect(() => {
-        apiCall(usersRequest,interestsRequest,sortType,setUsers,setInterests);
+        apiCall(usersRequest,interestsRequest,setUsers,setInterests);
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [sortType])
+    }, [])
 
     useEffect(() => {
         if(users.length && interests.length) {
@@ -47,8 +46,15 @@ function Users() {
 
 console.log('users', users)
 
-const sort  = (sort) => {
-    setsortType(sort);
+
+const sortDesc = () => {
+    setUsers([...users].sort((a,b)=> b?.count - a?.count)
+    )
+}
+
+const sortAsc = () => {
+    setUsers([...users].sort((a,b)=> a?.count - b?.count)
+    )
 }
 
 const showInterestsFn = (user) => {
@@ -74,8 +80,8 @@ const removeUsers = (user) => {
             <div>
                 <h1>users list</h1>
                 <div className='sorting-list'>
-                    <button onClick={()=> sort('ascending')}>ascending sort</button>
-                    <button onClick={()=> sort('descending')}>descending sort</button>
+                    <button onClick={()=> sortAsc()}>ascending sort</button>
+                    <button onClick={()=> sortDesc()}>descending sort</button>
                     
 
                     <span className='users-total-count'>
