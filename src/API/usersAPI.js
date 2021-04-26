@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const apiCall = (usersRequest,interestsRequest,sortBoolean,setUsers,setInterests) => {
+export const apiCall = (usersRequest,interestsRequest,sortType,setUsers,setInterests) => {
     axios
     .all([usersRequest, interestsRequest])
     .then(
@@ -15,10 +15,9 @@ export const apiCall = (usersRequest,interestsRequest,sortBoolean,setUsers,setIn
                         response => response.id !== element.id && response.following.indexOf(element.id) > -1)?.length
                 })
             })
-            console.log('response 1', responses[0].data)
-            if(sortBoolean === 'ascending') {
+            if(sortType === 'ascending') {
                 newUsers.sort((a,b)=> a?.count - b?.count)
-            } else if (sortBoolean === 'descending') {
+            } else if (sortType === 'descending') {
                 newUsers.sort((a,b)=> b?.count - a?.count)
 
             }

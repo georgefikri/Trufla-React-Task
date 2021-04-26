@@ -5,17 +5,17 @@ import {apiCall} from '../../API/usersAPI'
 /* 
     0. change the state on the client side ( sort , remove interest ) don't call the api again
     1. move sorting code to be in usersList.js
-    2. remove sortBoolean from useEffect
+    2. remove sortType from useEffect
     3. api to be called once only ( remove any references )
-    4. fix this issue: fix followers count when remove a single user
-    5. remove the functions to be onClick to be separated not to be added inside onClick
+    4. fix this issue: fix followers count when remove a single user ( the fix is use contains instead of indexOf) 
+    5. remove the functions to be onClick to be separated not to be added inside onClick - done 
     6. extra: remove indidual interest
 */
 function Users() {
 
     const [users,setUsers] = useState([])
     const [interests,setInterests] = useState([])
-    const [sortBoolean, setSortBoolean] = useState(false)
+    const [sortType, setsortType] = useState(false)
     const [showInterests, setShowInterests] = useState([])
 
     let usersJSON = "users.json";
@@ -24,10 +24,10 @@ function Users() {
     const interestsRequest = axios.get(interestsJSON);
 
     useEffect(() => {
-        apiCall(usersRequest,interestsRequest,sortBoolean,setUsers,setInterests);
+        apiCall(usersRequest,interestsRequest,sortType,setUsers,setInterests);
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [sortBoolean])
+    }, [sortType])
 
     useEffect(() => {
         if(users.length && interests.length) {
@@ -45,9 +45,27 @@ function Users() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [interests])
 
+console.log('users', users)
 
 const sort  = (sort) => {
-    setSortBoolean(sort);
+    setsortType(sort);
+}
+
+const showInterestsFn = (user) => {
+    setShowInterests([...showInterests,
+        {name: user?.name}])
+}
+
+const hideInterestsFn = (user) => {
+    setShowInterests(showInterests.filter((obj)=>{
+        return obj.name !== user?.name;
+    }))
+}
+
+const removeUsers = (user) => {
+    setUsers(users.filter((obj)=>{
+        return obj.name !== user?.name;
+    }))
 }
 
 
@@ -58,6 +76,8 @@ const sort  = (sort) => {
                 <div className='sorting-list'>
                     <button onClick={()=> sort('ascending')}>ascending sort</button>
                     <button onClick={()=> sort('descending')}>descending sort</button>
+                    
+
                     <span className='users-total-count'>
                         <label>Total Users</label>
                         <span>{users?.length}</span>
@@ -85,28 +105,13 @@ const sort  = (sort) => {
                         {
                             user?.interests?.length ? 
                                 <div className='toggle-interests'>
-                                    <button 
-                                        onClick ={()=> 
-                                            setShowInterests([...showInterests,
-                                            {name: user?.name}])}>
-                                        show interests
-                                    </button>
-                                    <button 
-                                        onClick={
-                                            ()=> setShowInterests(showInterests.filter((obj)=>{
-                                                return obj.name !== user?.name;
-                                            }))
-                                        }>
-                                        hide interests
-                                    </button>
-
+                                    <button  onClick ={()=>  showInterestsFn(user) }> show interests</button>
+                                    <button onClick={ ()=> hideInterestsFn(user)}>hide interests</button>
                                 </div>
                             : undefined
                         }
                         <div className='remove-user'>
-                            <button onClick={()=> setUsers(users.filter((obj)=>{
-                                    return obj.name !== user?.name;
-                                }))}>
+                            <button onClick={()=> removeUsers(user)}>
                                 remove user
                             </button>
                         </div>
