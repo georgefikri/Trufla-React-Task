@@ -6,7 +6,7 @@ import {apiCall} from '../../API/usersAPI'
     0. change the state on the client side ( sort , remove interest ) don't call the api again
     1. move sorting code to be in usersList.js - done
     2. remove sortType from useEffect - done
-    3. api to be called once only ( remove any references )
+    3. api to be called once only ( remove any references ) - done
     4. fix this issue: fix followers count when remove a single user ( the fix is use contains instead of indexOf) 
     5. remove the functions to be onClick to be separated not to be added inside onClick - done 
     6. extra: remove indidual interest
