@@ -6,6 +6,9 @@ export const UserCardView = ({
   showInterestsFn,
   hideInterestsFn,
   removeUsers,
+  setUsers,
+  users,
+  interests,
 }) => {
   return (
     <div className="list-item">
@@ -16,11 +19,26 @@ export const UserCardView = ({
           (singleInterest) => singleInterest.name === user?.name
         ) && (
           <div className="interests-list">
-            <p>
-              {user?.interests?.map((interest) => {
-                return <span key={interest}>{interest}</span>;
+            <div>
+              {user?.interests?.map((interest, indexx) => {
+                return (
+                  <div key={interest} className="interest">
+                    <span>{interest} </span>
+                    {/* {console.log("interest", user?.interests)}
+                    {console.log("user", user)} */}
+
+                    <span
+                      onClick={() =>
+                        setUsers([...users, user?.interests?.splice(indexx, 1)])
+                      }
+                    >
+                      delete
+                    </span>
+                    {/* {console.log("users", user?.interests?.splice(1, indexx))} */}
+                  </div>
+                );
               })}
-            </p>
+            </div>
           </div>
         )}
       {user?.interests?.length ? (
