@@ -16,7 +16,7 @@ export const UserCardView = ({
   return (
     <div className="list-item">
       <h3 className="name">{user?.name}</h3>
-      <div className="count">followers count: {user?.followers?.length}</div>
+      <div className="count">followers count: {user?.count?.length}</div>
       {showInterests !== [] &&
         showInterests.some(
           (singleInterest) => singleInterest.name === user?.name

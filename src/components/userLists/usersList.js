@@ -37,7 +37,7 @@ const UsersList = () => {
             // ...user,
             id: user.id,
             name: user?.name,
-            followers: user?.followers,
+            count: user?.count,
             interests: interests
               .filter((interest) => user.interests?.indexOf(interest.id) > -1)
               .map((interest) => {
@@ -51,15 +51,11 @@ const UsersList = () => {
   }, [interests]);
 
   const sortDesc = () => {
-    setUsers(
-      [...users].sort((a, b) => b?.followers.length - a?.followers.length)
-    );
+    setUsers([...users].sort((a, b) => b?.count.length - a?.count.length));
   };
 
   const sortAsc = () => {
-    setUsers(
-      [...users].sort((a, b) => a?.followers.length - b?.followers.length)
-    );
+    setUsers([...users].sort((a, b) => a?.count.length - b?.count.length));
   };
 
   const showInterestsFn = (user) => {
@@ -85,10 +81,9 @@ const UsersList = () => {
             id: user.id,
             name: user.name,
             interests: user?.interests,
-            followers: [
-              ...filterUserFromFollowers(user?.followers, selectedUser),
-            ],
+            count: [...filterUserFromFollowers(user?.count, selectedUser)],
           };
+          console.log("newUser", newUser);
           return newUser;
         }
       }),
@@ -96,20 +91,13 @@ const UsersList = () => {
     setUsers([...newUsers]);
   };
 
-  // const removeUsers = (user) => {
-  //   setUsers(
-  //     users.filter((obj) => {
-  //       return obj.name !== user?.name;
-  //     })
-  //   );
-  // };
   const removeInterests = (interest, indexx) => {
     setUsers(
       users.map((user) => {
         return {
           id: user.id,
           name: user?.name,
-          followers: user?.followers,
+          count: user?.count,
           interests: user?.interests.filter(
             (item, index) => item[index] !== interest[indexx]
           ),
@@ -118,7 +106,6 @@ const UsersList = () => {
     );
   };
 
-  console.log("users", users);
   return (
     <div>
       <div>
