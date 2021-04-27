@@ -74,6 +74,22 @@ const UsersList = () => {
     );
   };
 
+  const removeInterests = (interest, indexx) => {
+    setUsers(
+      users.map((user) => {
+        return {
+          // ...user,
+          id: user.id,
+          name: user?.name,
+          followers: user?.followers,
+          interests: user?.interests.filter(
+            (item, index) => item[index] !== interest[indexx]
+          ),
+        };
+      })
+    );
+  };
+
   //   const filterUserFromFollowers = (followersList, selectedUser) =>
   //     followersList?.filter((u) => u?.id !== selectedUser?.id);
 
@@ -152,26 +168,7 @@ const UsersList = () => {
 
                             <span
                               className="cursor-pointer d-inline-block ml-30"
-                              onClick={() =>
-                                // setUsers([
-                                //   ...users,
-                                //   user?.interests?.splice(indexx, 1),
-                                // ])
-                                setUsers(
-                                  users.map((user) => {
-                                    return {
-                                      // ...user,
-                                      id: user.id,
-                                      name: user?.name,
-                                      followers: user?.followers,
-                                      interests: user?.interests.filter(
-                                        (item, index) =>
-                                          item[index] !== interest[indexx]
-                                      ),
-                                    };
-                                  })
-                                )
-                              }
+                              onClick={() => removeInterests(interest, indexx)}
                             >
                               <FontAwesomeIcon icon={faTrash} />
                             </span>
