@@ -3,6 +3,8 @@ import axios from "axios";
 import "./styles/styles.scss";
 import { apiCall } from "../../API/usersAPI";
 import { UserCardView } from "./userCard.View";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 /* 
     0. change the state on the client side ( sort , remove interest ) don't call the api again
     1. move sorting code to be in usersList.js - done
@@ -149,6 +151,7 @@ const UsersList = () => {
                     {console.log("user", user)} */}
 
                             <span
+                              className="cursor-pointer d-inline-block ml-30"
                               onClick={() =>
                                 // setUsers([
                                 //   ...users,
@@ -170,7 +173,7 @@ const UsersList = () => {
                                 )
                               }
                             >
-                              delete
+                              <FontAwesomeIcon icon={faTrash} />
                             </span>
                             {/* {console.log("users", user?.interests?.splice(1, indexx))} */}
                           </div>
