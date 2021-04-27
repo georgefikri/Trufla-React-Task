@@ -6,13 +6,13 @@ import { UserCardView } from "./userCard.View";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 /* 
-    0. change the state on the client side ( sort , remove interest ) don't call the api again
+    0. change the state on the client side ( sort , remove interest ) don't call the api again - done
     1. move sorting code to be in usersList.js - done
     2. remove sortType from useEffect - done
     3. api to be called once only ( remove any references ) - done
     4. fix this issue: fix followers count when remove a single user
     5. remove the functions to be onClick to be separated not to be added inside onClick - done 
-    6. extra: remove indidual interest
+    6. extra: remove indidual interest - done
 */
 const UsersList = () => {
   const [users, setUsers] = useState([]);
@@ -107,7 +107,6 @@ const UsersList = () => {
     setUsers(
       users.map((user) => {
         return {
-          // ...user,
           id: user.id,
           name: user?.name,
           followers: user?.followers,
@@ -151,52 +150,6 @@ const UsersList = () => {
               FontAwesomeIcon={FontAwesomeIcon}
               faTrash={faTrash}
             />
-            // <div className="list-item">
-            //   <h3 className="name">{user?.name}</h3>
-            //   <div className="count">
-            //     followers count: {user?.followers?.length}
-            //   </div>
-            //   {showInterests !== [] &&
-            //     showInterests.some(
-            //       (singleInterest) => singleInterest.name === user?.name
-            //     ) && (
-            //       <div className="interests-list">
-            //         <div>
-            //           {user?.interests?.map((interest, indexx) => {
-            //             return (
-            //               <div key={interest} className="interest">
-            //                 <span>{interest} </span>
-            //                 {/* {console.log("interest", user?.interests)}
-            //         {console.log("user", user)} */}
-
-            //                 <span
-            //                   className="cursor-pointer d-inline-block ml-30"
-            //                   onClick={() => removeInterests(interest, indexx)}
-            //                 >
-            //                   <FontAwesomeIcon icon={faTrash} />
-            //                 </span>
-            //                 {/* {console.log("users", user?.interests?.splice(1, indexx))} */}
-            //               </div>
-            //             );
-            //           })}
-            //         </div>
-            //       </div>
-            //     )}
-            //   {user?.interests?.length ? (
-            //     <div className="toggle-interests">
-            //       <button onClick={() => showInterestsFn(user)}>
-            //         {" "}
-            //         show interests
-            //       </button>
-            //       <button onClick={() => hideInterestsFn(user)}>
-            //         hide interests
-            //       </button>
-            //     </div>
-            //   ) : undefined}
-            //   <div className="remove-user">
-            //     <button onClick={() => removeUsers(user)}>remove user</button>
-            //   </div>
-            // </div>
           ))}
         </div>
       </div>
