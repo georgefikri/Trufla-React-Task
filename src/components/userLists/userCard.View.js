@@ -9,6 +9,9 @@ export const UserCardView = ({
   setUsers,
   users,
   interests,
+  removeInterests,
+  FontAwesomeIcon,
+  faTrash,
 }) => {
   return (
     <div className="list-item">
@@ -28,13 +31,11 @@ export const UserCardView = ({
                     {console.log("user", user)} */}
 
                     <span
-                      onClick={() =>
-                        setUsers([...users, user?.interests?.splice(indexx, 1)])
-                      }
+                      className="cursor-pointer d-inline-block ml-30"
+                      onClick={() => removeInterests(interest, indexx)}
                     >
-                      delete
+                      <FontAwesomeIcon icon={faTrash} />
                     </span>
-                    {/* {console.log("users", user?.interests?.splice(1, indexx))} */}
                   </div>
                 );
               })}
