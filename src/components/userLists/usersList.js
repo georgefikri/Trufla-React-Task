@@ -9,10 +9,9 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
     0. change the state on the client side ( sort , remove interest ) don't call the api again - done
     1. move sorting code to be in usersList.js - done
     2. remove sortType from useEffect - done
-    3. api to be called once only ( remove any references ) - done
-    4. fix this issue: fix followers count when remove a single user
-    5. remove the functions to be onClick to be separated not to be added inside onClick - done 
-    6. extra: remove indidual interest - done
+    3. fix this issue: fix followers count when remove a single user - not done
+    4. remove the functions to be onClick to be separated not to be added inside onClick - done 
+    5. extra: remove indidual interest - done
 */
 const UsersList = () => {
   const [users, setUsers] = useState([]);
@@ -143,4 +142,4 @@ const UsersList = () => {
   );
 };
 
-export default UsersList;
+export const UsersListComp = UsersList;
