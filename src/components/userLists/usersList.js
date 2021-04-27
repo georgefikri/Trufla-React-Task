@@ -34,7 +34,6 @@ const UsersList = () => {
       setUsers(
         users.map((user) => {
           return {
-            // ...user,
             id: user.id,
             name: user?.name,
             count: user?.count,
