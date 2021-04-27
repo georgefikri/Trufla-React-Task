@@ -24,9 +24,6 @@ export const UserCardView = ({
                 return (
                   <div key={interest} className="interest">
                     <span>{interest} </span>
-                    {/* {console.log("interest", user?.interests)}
-                    {console.log("user", user)} */}
-
                     <span
                       className="cursor-pointer d-inline-block ml-30"
                       onClick={() => removeInterests(interest, indexx)}
