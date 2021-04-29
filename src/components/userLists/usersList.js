@@ -73,19 +73,21 @@ const UsersList = () => {
 
   const removeUsers = (selectedUser) => {
     const newUsers = [
-      ...users.filter((user) => {
-        if (user.id !== selectedUser?.id) {
-          const newUser = {
-            id: user.id,
-            name: user.name,
-            interests: user?.interests,
-            count: [...filterUserFromFollowers(user?.count, selectedUser)],
-          };
-          console.log("newUser", newUser);
-          return newUser;
-        }
-      }),
+      ...users
+        .map((user) => {
+          if (user.id !== selectedUser?.id) {
+            const newUser = {
+              id: user.id,
+              name: user.name,
+              interests: user?.interests,
+              count: [...filterUserFromFollowers(user?.count, selectedUser)],
+            };
+            return newUser;
+          }
+        })
+        .filter(Boolean),
     ];
+    console.log("newUsers", newUsers);
     setUsers([...newUsers]);
   };
 
