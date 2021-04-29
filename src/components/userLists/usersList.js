@@ -87,7 +87,6 @@ const UsersList = () => {
         })
         .filter(Boolean),
     ];
-    console.log("newUsers", newUsers);
     setUsers([...newUsers]);
   };
 
